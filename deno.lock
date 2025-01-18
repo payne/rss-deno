@@ -2,6 +2,7 @@
   "version": "4",
   "specifiers": {
     "npm:@libsql/client@0.14": "0.14.0",
+    "npm:drizzle-kit@*": "0.26.2_esbuild@0.19.12",
     "npm:drizzle-kit@~0.26.2": "0.26.2_esbuild@0.19.12",
     "npm:drizzle-orm@~0.35.3": "0.35.3_@libsql+client@0.14.0_@libsql+client-wasm@0.14.0"
   },
