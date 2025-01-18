@@ -1,9 +1,19 @@
-import { serve } from "https://deno.land/std@0.195.0/http/server.ts";
-import { Hono } from "https://deno.land/x/hono/mod.ts";
-import { serveFile } from "https://deno.land/x/hono/middleware/file.ts"; 
+// Started with https://docs.deno.com/examples/http_server_files/
+import { serveDir, serveFile } from "jsr:@std/http/file-server";
+Deno.serve((req: Request) => {
+  const pathname = new URL(req.url).pathname;
+  console.log(pathname);
+  const dist = './angular1/dist/angular1/browser';
 
-const app = new Hono();
 
-app.get("*", serveFile("./dist")); 
+    return serveDir(req, {
+      fsRoot: dist,
+      urlRoot: "",
+    });
 
-serve(app.fetch.bind(app), { port: 8000 });
+  return new Response("404: Not Found", {
+    status: 404,
+  });
+});
+
+
