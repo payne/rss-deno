@@ -3,5 +3,4 @@ node_modules
 coverage
 *.log
 *.lcov
-.env
 *.db
