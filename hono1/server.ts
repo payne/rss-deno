@@ -1,19 +1,14 @@
-import { Hono } from 'hono';
-import { serveStatic } from 'hono/serve-static.module';
+import { serve } from "https://deno.land/std@0.195.0/http/server.ts";
+import { Hono } from "https://deno.land/x/hono/mod.ts";
 
 const app = new Hono();
+const dist = './angular1/dist/angular1/browser';
 
-// Serve static files from the 'dist' directory
-app.use(
-  '/public/*', 
-  serveStatic({ root: './dist/my-angular-app' }) 
-);
-
-// Handle any other route as an Angular route
-app.get('*', (c) => {
-  return c.file('./dist/my-angular-app/index.html');
+app.get("*", async (c) => {
+  return c.send({
+    root: dist,
+    index: "index.html",
+  });
 });
 
-app.listen({ port: 8000 });
-
-console.log('Server listening on http://localhost:8000');
+serve(app.fetch.bind(app), { port: 8000 });
